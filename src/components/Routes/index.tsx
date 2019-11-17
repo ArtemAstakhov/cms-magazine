@@ -1,9 +1,24 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import Loadable from "react-loadable";
 
-import { ROUTES } from "../../constants";
-import { FavoritesPage } from "../../pages/Favorites";
-import { InstrumentsPage } from "../../pages/Instruments";
+import { ROUTES } from "@constants";
+
+const Loader: React.FunctionComponent = () => (
+  <div>
+    Loading...
+  </div>
+);
+
+const FavoritesPage = Loadable({
+  loader: () => import("@pages/Favorites"),
+  loading: () => <Loader />,
+});
+
+const InstrumentsPage = Loadable({
+  loader: () => import("@pages/Instruments"),
+  loading: () => <Loader />,
+});
 
 export const Routes: React.FunctionComponent = () => {
   return (
