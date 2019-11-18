@@ -24,7 +24,8 @@
       "@components/*": ["src/components/*"],
       "@constants": ["src/constants/index.ts"],
       "@constants/*": ["src/constants/*"],
-      "@mocks/*": ["src/mocks/*"]
+      "@mocks/*": ["src/mocks/*"],
+      "@images/*": ["src/assets/images/*"]
     }
   },
   "include": [

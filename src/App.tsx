@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { Menu } from "./components/Menu";
-import { Routes } from "./components/Routes";
+import { Menu } from "@components/Menu";
+import { Routes } from "@components/Routes";
+import styles from "./App.module.scss";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Menu />
-      <div>
-        <Routes />
+      <div className={styles.body}>
+        <Menu />
+        <div className={styles.content}>
+          <Routes />
+        </div>
       </div>
+      <footer>
+        Footer
+      </footer>
     </div>
   );
 }

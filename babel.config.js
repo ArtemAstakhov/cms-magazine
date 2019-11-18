@@ -29,6 +29,7 @@ module.exports = function(api) {
           "@components": "./src/components",
           "@constants": "./src/constants",
           "@mocks": "./src/mocks",
+          "@images": "./src/assets/images",
         }
       }
     ]
