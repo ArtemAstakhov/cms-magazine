@@ -27,7 +27,7 @@
       "@mocks/*": ["src/mocks/*"],
       "@images/*": ["src/assets/images/*"],
       "@ui-kit/*": ["src/ui-kit/*"],
-      "@theme": ["src/theme.scss"]
+      "@helpers/*": ["src/helpers/*"]
     }
   },
   "include": [

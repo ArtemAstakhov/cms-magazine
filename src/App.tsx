@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Menu } from "@components/Menu";
 import { Routes } from "@components/Routes";
+import "./theme.scss";
 import styles from "./App.module.scss";
 
 const App: React.FC = () => {

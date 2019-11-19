@@ -30,7 +30,8 @@ module.exports = function(api) {
           "@constants": "./src/constants",
           "@mocks": "./src/mocks",
           "@images": "./src/assets/images",
-          "@theme": "./src/theme.scss",
+          "@helpers": "./src/helpers",
+          "@ui-kit": "./src/ui-kit",
         }
       }
     ]
