@@ -52,8 +52,21 @@
   }
 }
 
-.actions {
+.favoritesLink {
+  position: relative;
 
+  .favoritesCounter {
+    position: absolute;
+    right: 0;
+    color: white;
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .logoContainer {

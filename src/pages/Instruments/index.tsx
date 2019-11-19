@@ -1,62 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
 
 import styles from "./Instruments.module.scss";
 import { ReactComponent as StarIcon } from "@images/star.svg";
 import { declOfNum } from "@helpers/declOfNum";
-
-const array = [
-  {
-    code: "bitrix",
-    firstLettersOfName: "1С",
-    id: 56,
-    image: "https://images.cmsmagazine.ru/img_out/catalog_cms/upload7vu33x1i85.png",
-    partnersCount: 2174,
-    rate: 4.3,
-    shortUrl: "1c-bitrix.ru",
-    title: "1С-Битрикс",
-    url: "http://www.1c-bitrix.ru/",
-    worksCount: 34857,
-  },
-  {
-    code: "wordpress",
-    firstLettersOfName: "WO",
-    id: 121,
-    image: "https://images.cmsmagazine.ru/img_out/catalog_cms/uploadg5c0Ub.png",
-    partnersCount: 1741,
-    rate: 4.5,
-    shortUrl: "wordpress.org",
-    title: "WordPress",
-    url: "http://www.wordpress.org/",
-    worksCount: 14194,
-  },
-  {
-    code: "joomla",
-    firstLettersOfName: "JO",
-    id: 115,
-    image: "https://images.cmsmagazine.ru/img_out/catalog_cms/uploadJbAIHH.jpg",
-    partnersCount: 1005,
-    rate: 4.5,
-    shortUrl: "joomla.org",
-    title: "Joomla!",
-    url: "http://www.joomla.org/",
-    worksCount: 8896,
-  }
-];
-
-const faves: number[] = [];
-const addToFaves = (id: number) => {
-  const current = faves.indexOf(id);
-
-  if (current !== -1) {
-    faves.splice(current, 1);
-  } else {
-    faves.push(id);
-  }
-}
+import { Instrument } from "@models/instrument";
+import HttpService from "@services/http";
+import { toggleFavorite } from "@actions";
+import { useStore } from "@hooks";
 
 const InstrumentsPage: React.FunctionComponent = () => {
+  const [instruments, setInstruments] = useState<Instrument[]>([]);
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const dispatch = useDispatch();
+  const { favorites } = useStore();
+
+  useEffect(() => {
+    (async () => {
+      const response = await HttpService.get<Instrument[]>(
+        "https://api.cmsmagazine.ru/v1/instrumentsList",
+        {
+          instrument_type_code: "cms",
+          page: 1,
+        }
+      );
+
+      setInstruments(response.data);
+    })();
+  }, []);
 
   return (
     <div>
@@ -84,7 +56,7 @@ const InstrumentsPage: React.FunctionComponent = () => {
         </thead>
 
         <tbody>
-          {array.map((instument, i) => (
+          {instruments.map((instument, i) => (
             <tr
               onMouseEnter={() => setHoveredRow(i)}
               onMouseLeave={() => setHoveredRow(null)}
@@ -92,11 +64,13 @@ const InstrumentsPage: React.FunctionComponent = () => {
             >
               <td
                 className={classNames(styles.favCell, {
-                  [styles.activeFav]: faves.includes(instument.id),
+                  [styles.activeFav]: favorites.find((f) => f.id === instument.id),
                 })}
               >
-                {(i === hoveredRow || faves.includes(instument.id)) && (
-                  <StarIcon onClick={() => addToFaves(instument.id)} />
+                {(i === hoveredRow || favorites.find((f) => f.id === instument.id)) && (
+                  <StarIcon onClick={() => {
+                    dispatch(toggleFavorite(instument));
+                  }} />
                 )}
               </td>
               <td>
@@ -108,7 +82,12 @@ const InstrumentsPage: React.FunctionComponent = () => {
                 />
               </td>
               <td>
-                {instument.title}
+                <div>
+                  {instument.title}
+                </div>
+                {/* <div>
+                  {instument.}
+                </div> */}
               </td>
               <td>
                 {instument.worksCount} {declOfNum(instument.worksCount, ["проект", "проекта", "проектов"])}

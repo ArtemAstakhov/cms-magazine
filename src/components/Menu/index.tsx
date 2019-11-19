@@ -1,14 +1,17 @@
-/* eslint import/no-webpack-loader-syntax: off */
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import classNames from "classnames";
 
 import { ROUTES } from "@constants";
 import styles from "./Menu.module.scss";
 import { ReactComponent as StarIcon } from "@images/star.svg";
 import { ReactComponent as SearchIcon } from "@images/search.svg";
 import { ReactComponent as EnterIcon } from "@images/enter.svg";
+import { useStore } from "@hooks";
 
 export const Menu: React.FunctionComponent = () => {
+  const { favorites } = useStore();
+
   return (
     <div className={styles.wrapper}>
       <Link to="/" className={styles.logoContainer}>
@@ -52,11 +55,21 @@ export const Menu: React.FunctionComponent = () => {
       <div className={styles.divider} />
 
       <div className={styles.actions}>
-        <NavLink to={ROUTES.favorites} className={styles.link} activeClassName={styles.linkActive}>
+        <NavLink
+          to={ROUTES.favorites}
+          className={classNames(styles.link, styles.favoritesLink)}
+          activeClassName={styles.linkActive}
+        >
           <span>
             <StarIcon />
             Избранное
           </span>
+
+          {favorites.length > 0 && (
+            <span className={styles.favoritesCounter}>
+              {favorites.length}
+            </span>
+          )}
         </NavLink>
         <div className={styles.link}>
           <span>

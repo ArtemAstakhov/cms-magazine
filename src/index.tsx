@@ -5,13 +5,29 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { Provider } from "react-redux";
+
+import configureStore from "@store/configureStore";
+
+const getSavedFaves = () => {
+  const saved = localStorage.getItem("faves");
+
+  if (saved) {
+    return JSON.parse(saved);
+  }
+
+  return [];
+}
 
 const history = createBrowserHistory();
+const store = configureStore({ favorites: getSavedFaves() });
 
 ReactDOM.render(
-  <Router history={history}>
-    <App />
-  </Router>,
+  <Provider store={store}>
+    <Router history={history}>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById("root"),
 );
 

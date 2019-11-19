@@ -27,7 +27,13 @@
       "@mocks/*": ["src/mocks/*"],
       "@images/*": ["src/assets/images/*"],
       "@ui-kit/*": ["src/ui-kit/*"],
-      "@helpers/*": ["src/helpers/*"]
+      "@helpers/*": ["src/helpers/*"],
+      "@models/*": ["src/models/*"],
+      "@services/*": ["src/services/*"],
+      "@reducers": ["src/reducers/index.ts"],
+      "@actions": ["src/actions/index.ts"],
+      "@store/*": ["src/store/*"],
+      "@hooks": ["src/hooks/index.ts"]
     }
   },
   "include": [

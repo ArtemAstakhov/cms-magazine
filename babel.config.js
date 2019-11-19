@@ -17,6 +17,12 @@ module.exports = function(api) {
   const plugins = [
     "react-loadable/babel",
     "@babel/plugin-transform-runtime",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true,
+      }
+    ],
     "@babel/plugin-syntax-dynamic-import",
     [
       "module-resolver",
@@ -32,6 +38,12 @@ module.exports = function(api) {
           "@images": "./src/assets/images",
           "@helpers": "./src/helpers",
           "@ui-kit": "./src/ui-kit",
+          "@models": "./src/models",
+          "@services": "./src/services",
+          "@reducers": "./src/reducers",
+          "@actions": "./src/actions",
+          "@store": "./src/store",
+          "@hooks": "./src/hooks",
         }
       }
     ]
