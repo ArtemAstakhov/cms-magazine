@@ -23,12 +23,20 @@ const FavoritesPage: React.FunctionComponent = () => {
               key={`row-${i}`}
             >
               <td className={styles.logoCell}>
-                <div
-                  className={styles.logo}
-                  style={{
-                    backgroundImage: `url(${instument.image})`,
-                  }}
-                />
+                {Boolean(instument.image) ? (
+                  <div
+                    className={styles.logo}
+                    style={{
+                      backgroundImage: `url(${instument.image})`,
+                    }}
+                  />
+                ) : (
+                  <div
+                    className={styles.logo}
+                  >
+                    {instument.firstLettersOfName}
+                  </div>
+                )}
               </td>
               <td>
                 {instument.title}

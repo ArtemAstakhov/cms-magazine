@@ -9,11 +9,11 @@ import { ReactComponent as SearchIcon } from "@images/search.svg";
 import { ReactComponent as EnterIcon } from "@images/enter.svg";
 import { useStore } from "@hooks";
 
-export const Menu: React.FunctionComponent = () => {
+export const Menu = React.forwardRef(({}, ref: React.Ref<HTMLDivElement>) => {
   const { favorites } = useStore();
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={ref}>
       <Link to="/" className={styles.logoContainer}>
         <div className={styles.logo}>
           CMS
@@ -86,4 +86,4 @@ export const Menu: React.FunctionComponent = () => {
       </div>
     </div>
   );
-};
+});

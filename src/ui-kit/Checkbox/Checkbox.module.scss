@@ -1,0 +1,18 @@
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
+  display: inline-flex;
+  border-radius: 3px;
+  cursor: pointer;
+
+  &.checked {
+    background-color: red;
+    background-repeat: no-repeat;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNyIgaGVpZ2h0PSIxMyIgdmlld0JveD0iMCAwIDE3IDEzIj4KICAgIDxwYXRoIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc3Ryb2tlPSIjRkZGIiBzdHJva2Utd2lkdGg9IjEuMyIgZD0iTS45NzYgNi4wNTVsNS4yNTIgNS4yMDggOS44ODItOS44ODIiLz4KPC9zdmc+Cg==);
+  }
+
+  input {
+    display: none;
+  }
+}

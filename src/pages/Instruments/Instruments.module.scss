@@ -10,6 +10,7 @@
   td {
     padding: 20px 5px;
     border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
+    position: relative;
   }
 
   td, th {
@@ -39,6 +40,9 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hoveredRow {
@@ -50,5 +54,55 @@
     height: 30px;
     display: block;
     background-image: url("/src/assets/images/star.svg");
+  }
+}
+
+.title {
+  color: #000000;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.sponsorLink {
+  margin-top: 5px;
+
+  a {
+    text-decoration: none;
+    color: blue;
+  }
+}
+
+.sponsorLabel {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-size: 10px;
+}
+
+.sortableHeading {
+  cursor: pointer;
+  position: relative;
+
+  &.tableHeadingActiveSort {
+    color: rgba($color: red, $alpha: .4);
+
+    &:after {
+      position: absolute;
+      content: "";
+      border: solid rgba($color: red, $alpha: .4);
+      border-width: 0 3px 3px 0;
+      display: inline-block;
+      padding: 3px;
+      transform: translateY(-50%) rotate(-135deg);
+      right: -20px;
+      top: 50%;
+    }
+
+    &.descSort {
+      &:after {
+        transform: translateY(-50%) rotate(45deg);
+      }
+    }
   }
 }

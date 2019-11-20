@@ -20,11 +20,17 @@ const InstrumentsPage = Loadable({
   loading: () => <Loader />,
 });
 
+const InstrumentDetailsPage = Loadable({
+  loader: () => import("@pages/InstrumentDetails"),
+  loading: () => <Loader />,
+});
+
 export const Routes: React.FunctionComponent = () => {
   return (
     <Switch>
       <Route path={ROUTES.favorites} component={FavoritesPage} />
       <Route path={ROUTES.instruments} component={InstrumentsPage} />
+      <Route path={`${ROUTES.instrument}/:code`} component={InstrumentDetailsPage} />
     </Switch>
   );
 }

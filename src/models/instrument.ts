@@ -9,4 +9,5 @@ export type Instrument = {
   title: string;
   url: string;
   worksCount: number;
+  isSponsor: 0 | 1;
 };
