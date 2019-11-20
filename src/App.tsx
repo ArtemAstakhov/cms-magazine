@@ -2,12 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 
 import { Menu } from "@components/Menu";
 import { Routes } from "@components/Routes";
-import "./theme.scss";
+import { ProgressSpinner } from "@ui-kit/Progress";
+import { useStore } from "@hooks";
 import styles from "./App.module.scss";
 
 const App: React.FC = () => {
   const [minContentHeight, setMinContentHeight] = useState<number>();
   const menuRef = useRef<HTMLDivElement>(null);
+  const { isFetching } = useStore();
 
   useEffect(() => {
     if (menuRef.current) {
@@ -33,6 +35,10 @@ const App: React.FC = () => {
       >
         Footer
       </footer>
+
+      {isFetching && (
+        <ProgressSpinner/>
+      )}
     </div>
   );
 }

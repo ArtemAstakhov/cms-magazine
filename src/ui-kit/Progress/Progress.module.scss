@@ -1,0 +1,59 @@
+.progressOverlay {
+  align-items: center;
+  background-color: rgba(255, 255, 255, .8);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 99999;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 5rem;
+
+  div {
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    &.ring {
+      border-width: 0.5rem;
+      border-style: solid;
+      border-color: transparent;
+
+      :global {
+        animation: 2s fancy infinite alternate;
+      }
+      
+      &:nth-child(1) {
+        border-left-color: #979fd0;
+        border-right-color: #979fd0;
+      }
+      &:nth-child(2) {
+        border-top-color: #979fd0;
+        border-bottom-color: #979fd0;
+        animation-delay: 1s;
+      }
+    }
+
+    &.dot {
+      width: 1rem;
+      height: 1rem;
+      background: #979fd0;
+    }
+  }
+}
+
+@keyframes :global(fancy) {
+  to {
+    transform: rotate(360deg) scale(0.5);
+  }
+}

@@ -20,7 +20,7 @@ const getSavedFaves = () => {
 }
 
 const history = createBrowserHistory();
-const store = configureStore({ favorites: getSavedFaves() });
+const store = configureStore({ favorites: getSavedFaves(), isFetching: false });
 
 ReactDOM.render(
   <Provider store={store}>

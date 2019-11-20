@@ -8,7 +8,7 @@ import { ReactComponent as StarIcon } from "@images/star.svg";
 import { declOfNum } from "@helpers/declOfNum";
 import { Instrument } from "@models/instrument";
 import HttpService from "@services/http";
-import { toggleFavorite } from "@actions";
+import { toggleFavorite, setFetching } from "@actions";
 import { useStore } from "@hooks";
 import { Checkbox } from "@ui-kit/Checkbox";
 
@@ -19,6 +19,7 @@ const InstrumentsPage: React.FunctionComponent = () => {
   const [instruments, setInstruments] = useState<Instrument[]>([]);
   const [sort, setSort] = useState<Sort>("partners_count");
   const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
+  const [page, setPage] = useState(1);
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   const dispatch = useDispatch();
   const { favorites } = useStore();
@@ -29,23 +30,32 @@ const InstrumentsPage: React.FunctionComponent = () => {
 
   useEffect(() => {
     fetchInstruments();
-  }, [sortDirection, sort]);
+  }, [sortDirection, sort, page]);
 
   async function fetchInstruments() {
-    const response = await HttpService.get<Instrument[]>(
-      "https://api.cmsmagazine.ru/v1/instrumentsList",
-      {
-        instrument_type_code: "cms",
-        page: 1,
-        sort_direction: sortDirection,
-        sort,
-      }
-    );
+    try {
+      dispatch(setFetching(true));
 
-    setInstruments(response.data);
+      const response = await HttpService.get<Instrument[]>(
+        "https://api.cmsmagazine.ru/v1/instrumentsList",
+        {
+          instrument_type_code: "cms",
+          page,
+          sort_direction: sortDirection,
+          sort,
+        }
+      );
+
+      setInstruments([...instruments, ...response.data]);
+    } finally {
+      dispatch(setFetching(false));
+    }
   }
 
   function handleSortChange(newSort: Sort) {
+    setInstruments([]);
+    setPage(1);
+
     if (newSort !== sort) {
       setSort(newSort);
       setSortDirection("desc");
@@ -183,6 +193,13 @@ const InstrumentsPage: React.FunctionComponent = () => {
           })}
         </tbody>
       </table>
+
+      <div
+        className={styles.showMore}
+        onClick={() => setPage((prev) => prev + 1)}
+      >
+        Показать еще
+      </div>
     </div>
   );
 }

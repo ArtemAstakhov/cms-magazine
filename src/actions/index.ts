@@ -1,7 +1,7 @@
 import { ThunkAction } from "redux-thunk";
 import { AnyAction } from "redux";
 
-import { SET_FAVORITES } from "@constants/store";
+import { SET_FAVORITES, SET_FETCHING } from "@constants/store";
 import { Instrument } from "@models/instrument";
 import { Store } from "@models/store";
 
@@ -11,6 +11,13 @@ function setFavorites(favorites: Instrument[]) {
   return {
     type: SET_FAVORITES,
     payload: favorites,
+  }
+}
+
+export function setFetching(fetching: boolean) {
+  return {
+    type: SET_FETCHING,
+    payload: fetching,
   }
 }
 
